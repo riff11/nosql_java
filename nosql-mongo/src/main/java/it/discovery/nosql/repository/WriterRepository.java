@@ -1,16 +1,16 @@
 package it.discovery.nosql.repository;
 
-import it.discovery.nosql.model.Person;
+import it.discovery.nosql.model.Writer;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
 
-public interface PersonRepository extends MongoRepository<Person, String> {
+public interface WriterRepository extends MongoRepository<Writer, String> {
 
 	/**
 	 * Returns all the persons sorted by name
 	 *
 	 * @return
 	 */
-	List<Person> findByOrderByNameAsc();
+	List<Writer> findByOrderByNameAsc();
 }

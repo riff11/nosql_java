@@ -10,12 +10,10 @@ import java.util.List;
 @Getter
 @Setter
 @Document(collection = "persons")
-@TypeAlias("c")
-public class Customer extends Person {
-
-	private String login;
-
-	private String password;
-
-	private List<String> purchasedBooks;
+@TypeAlias("w")
+public class Writer extends Person {
+    /**
+     * Books that person has written
+     */
+    private List<String> works;
 }

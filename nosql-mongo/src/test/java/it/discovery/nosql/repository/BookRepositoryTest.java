@@ -2,9 +2,9 @@ package it.discovery.nosql.repository;
 
 import it.discovery.nosql.BaseMongoTest;
 import it.discovery.nosql.model.Book;
-import it.discovery.nosql.model.Person;
 import it.discovery.nosql.model.Publisher;
 import it.discovery.nosql.model.Review;
+import it.discovery.nosql.model.Writer;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,15 +19,15 @@ public class BookRepositoryTest extends BaseMongoTest {
     BookRepository bookRepository;
 
     @Autowired
-    PersonRepository personRepository;
+    WriterRepository writerRepository;
 
     @Test
     @Disabled
     void findWithReviews_returnsSingleBook() {
-        Person author = new Person();
+        Writer author = new Writer();
         author.setName("Gavin King");
 
-        personRepository.save(author);
+        writerRepository.save(author);
         Publisher publisher = new Publisher();
         publisher.setName("Packt");
 
@@ -54,10 +54,10 @@ public class BookRepositoryTest extends BaseMongoTest {
 
     @Test
     void saveWithTranslaction_findAll_returnsSingleBook() {
-        Person author = new Person();
+        Writer author = new Writer();
         author.setName("Gavin King");
 
-        personRepository.save(author);
+        writerRepository.save(author);
         Publisher publisher = new Publisher();
         publisher.setName("Packt");
 
