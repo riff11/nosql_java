@@ -2,23 +2,21 @@ package it.discovery.nosql.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
 public abstract class BaseEntity {
-	private Integer id;
+    @Id
+    private String id;
 
-	private LocalDateTime created;
+    @CreatedDate
+    private LocalDateTime created;
 
-	private LocalDateTime modified;
-
-	public void OnPersist() {
-		created = LocalDateTime.now();
-	}
-	
-	public void onUpdate() {
-		modified = LocalDateTime.now();
-	}
+    @LastModifiedDate
+    private LocalDateTime modified;
 }

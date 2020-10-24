@@ -2,46 +2,42 @@ package it.discovery.nosql.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Book in a library
- * 
  */
 @Getter
 @Setter
+@Document(collection = "books")
 public class Book extends BaseEntity {
-	private String nameEn;
+    private List<Translation> translations;
 
-	private String nameRu;
+    private Complexity complexity;
 
-	private String nameUk;
-	
-	private Complexity complexity;
+    private String authorId;
 
-	private Person author;
+    private String publisherId;
 
-	private Publisher publisher;
+    /**
+     * Publishing year
+     */
+    private int year;
 
-	/**
-	 * Publishing year
-	 */
-	private int year;
+    /**
+     * Total number of pages
+     */
+    private int pages;
 
-	/**
-	 * Total number of pages
-	 */
-	private int pages;
+    private List<Review> reviews;
 
-	private List<Review> reviews;
-
-	public void addReview(Review review) {
-		if(reviews == null) {
-			reviews = new ArrayList<>();
-		}
-		reviews.add(review);
-		review.setBook(this);		
-	}
+    public void addReview(Review review) {
+        if (reviews == null) {
+            reviews = new ArrayList<>();
+        }
+        reviews.add(review);
+    }
 }
