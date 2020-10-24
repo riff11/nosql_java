@@ -1,24 +1,23 @@
 package it.discovery.nosql.service;
 
 import it.discovery.nosql.model.Book;
-import it.discovery.nosql.repository.BookRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 
 import java.util.List;
 
-@Service
 @RequiredArgsConstructor
 public class BookService {
 
-	private final BookRepository bookRepository;
+    private final MongoTemplate mongoTemplate;
 
-	public List<Book> findByName(String name) {
-		//return bookRepository.findByName(name);
-		return null;
-	}
+    public List<Book> findByName(String name) {
+        return mongoTemplate.find(new Query(Criteria.where("translations.text").is(name)), Book.class);
+    }
 
-	public void saveBook(Book book) {
-		bookRepository.save(book);
-	}
+    public void saveBook(Book book) {
+        mongoTemplate.save(book);
+    }
 }
