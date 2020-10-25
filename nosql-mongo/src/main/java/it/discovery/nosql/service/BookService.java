@@ -2,7 +2,10 @@ package it.discovery.nosql.service;
 
 import it.discovery.nosql.model.Book;
 import lombok.RequiredArgsConstructor;
+import org.bson.Document;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.aggregation.Aggregation;
+import org.springframework.data.mongodb.core.aggregation.GroupOperation;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 
@@ -19,5 +22,19 @@ public class BookService {
 
     public void saveBook(Book book) {
         mongoTemplate.save(book);
+    }
+
+    /**
+     * Returns overall number of pages for all the books
+     *
+     * @return
+     */
+    public Integer findTotalPages() {
+        GroupOperation sumOp = Aggregation.group()
+                .sum("pages").as("totalPages");
+        Aggregation pipeline = Aggregation.newAggregation(sumOp);
+        Document result = mongoTemplate.aggregate(pipeline, "books", Document.class)
+                .getUniqueMappedResult();
+        return result.getInteger("totalPages");
     }
 }

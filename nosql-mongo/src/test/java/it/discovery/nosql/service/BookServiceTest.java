@@ -36,4 +36,15 @@ public class BookServiceTest extends BaseMongoTest {
         assertTrue(books.isEmpty());
     }
 
+    @Test
+    void findTotalPages_returnsSum() {
+        Book book = new Book();
+        book.addTranslation("MongoDB", "en_US");
+        book.setPages(250);
+        bookService.saveBook(book);
+
+        Integer totalPages = bookService.findTotalPages();
+        assertEquals(250, totalPages);
+    }
+
 }

@@ -55,11 +55,4 @@ public interface BookRepository extends MongoRepository<Book, String> {
 	 * @return
 	 */
 	//List<Book> findAllByAuthor_Name(String name);
-
-	/**
-	 * Returns overall number of pages for all the books 
-	 * @return
-	 */
-	//int findTotalPages();
-
 }
