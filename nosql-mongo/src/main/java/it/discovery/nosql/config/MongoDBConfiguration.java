@@ -16,7 +16,7 @@ public class MongoDBConfiguration {
     public ApplicationListener<ApplicationReadyEvent> checkIndexes(MongoOperations mongoOperations) {
         return event ->
                 mongoOperations.indexOps(Book.class)
-                        .ensureIndex(new Index().on("translations.text", Sort.Direction.ASC));
+                        .ensureIndex(new Index().on("translations.$**", Sort.Direction.ASC));
     }
 
 }
