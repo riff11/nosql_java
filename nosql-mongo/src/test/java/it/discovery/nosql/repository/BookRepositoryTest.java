@@ -53,7 +53,7 @@ public class BookRepositoryTest extends BaseMongoTest {
     }
 
     @Test
-    void saveWithTranslaction_findAll_returnsSingleBook() {
+    void saveWithTranslaction_findByName_returnsSingleBook() {
         Writer author = new Writer();
         author.setName("Gavin King");
 
@@ -62,13 +62,14 @@ public class BookRepositoryTest extends BaseMongoTest {
         publisher.setName("Packt");
 
         Book book1 = new Book();
-        book1.addTranslation("JPA", "en_US");
+        book1.addTranslation("Indexes", "en_US");
         book1.setAuthorId(author.getId());
         bookRepository.save(book1);
 
-        List<Book> books = bookRepository.findAll();
+        List<Book> books = bookRepository.findByName("Indexes");
         assertEquals(1, books.size());
-        assertEquals("JPA", books.get(0).getTranslations().get(0).getText());
+        assertEquals("Indexes", books.get(0).getTranslations().get(0).getText());
+        assertEquals("en_US", books.get(0).getTranslations().get(0).getLocale());
     }
 
 }
